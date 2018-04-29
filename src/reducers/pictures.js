@@ -13,13 +13,14 @@ export default (state = initialState, action = {}) => {
             const picturesById = _.keyBy(action.data,'id');
             const pictureIds = action.data.map(p => p.id);
 
-            state.picturesById = Object.assign(
-                state.picturesById,
+            const newState = _.cloneDeep(state);
+            newState.picturesById = Object.assign(
+                newState.picturesById,
                 picturesById
             );
 
-            state.pictureIds.push(...pictureIds);
-            return state;
+            newState.pictureIds.push(...pictureIds);
+            return newState;
         default: 
             return state;
     }
